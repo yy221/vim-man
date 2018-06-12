@@ -18,7 +18,7 @@ function! man#get_page(split_type, ...)
     call s:handle_nroff_file_or_error(a:split_type)
     return
   elseif a:0 == 1
-    let sect = ''
+    let sect = '3'
     let page = a:1
   elseif a:0 >= 2
     let sect = a:1
@@ -26,7 +26,7 @@ function! man#get_page(split_type, ...)
   endif
 
   if sect !=# '' && !s:manpage_exists(sect, page)
-    let sect = ''
+    let sect = '3'
   endif
   if !s:manpage_exists(sect, page)
     call man#helpers#error("No manual entry for '".page."'.")
@@ -95,7 +95,7 @@ function! man#get_page_from_cword(split_type, cnt)
     let page = matchstr(str, '\(\k\|:\)\+')
     let sect = matchstr(str, '(\zs[^)]*\ze)')
     if sect !~# '^[0-9nlpo][a-z]*$' || sect ==# page
-      let sect = ''
+      let sect = '3'
     endif
   else
     let sect = a:cnt
